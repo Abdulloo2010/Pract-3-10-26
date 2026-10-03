@@ -119,8 +119,19 @@ public void DeleteTask(int id)
 
 public List<Taskk> GetSortedTasks()
 {
-    tasks.Sort((a, b) => b.CreatedAt.CompareTo(a.CreatedAt));
-    return tasks;
+for (int i = 0; i < tasks.Count; i++)
+{
+    for (int j = i + 1; j < tasks.Count; j++)
+    {
+        if (tasks[i].CreatedAt < tasks[j].CreatedAt)
+        {
+            var temp = tasks[i];
+            tasks[i] = tasks[j];
+            tasks[j] = temp;
+        }
+    }
+}
+return tasks;
 }
 
 public List<Taskk> GetTasksByPriority(int priority)
